@@ -6,10 +6,12 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import Container from 'react-bootstrap/container';
+//import Button from 'react-bootstrap/Button';
 import './index.css';
 
 class App extends React.Component {
-  state = { r: 0, g: 255, b: 0 };
+  state = { r: 37, g: 255, b: 38 };
 
   // Get a random integer, 0-255
   getRandomRGBComponent() {
@@ -27,22 +29,25 @@ class App extends React.Component {
     document.getElementById(
       "colorButton").style.backgroundColor = 
       'rgb(' + rgb.r + ',' +  rgb.g + ',' + rgb.b + ')';
-    console.log('setButtonBackgroundColor', rgb)
   }
 
   // Initialize the button's background color
   componentDidMount() {
     this.setButtonBackgroundColor();
+    //this.setButtonTextColor();
+    //this.onChangeRGB();
  }
 
   // Change the button's background RGB color.
-  onChangeRGB = () => {
-    this.setState({
-      r: this.getRandomRGBComponent(),
-      g: this.getRandomRGBComponent(),
-      b: this.getRandomRGBComponent(),
-    })
-    console.log('onChangeRGB(): New RGB is', this.state);
+  onChangeRGB = () => { // state consists of 3 integer RBG components
+    let [newR, newG, newB ] = [
+      this.getRandomRGBComponent(),
+      this.getRandomRGBComponent(),
+      this.getRandomRGBComponent()
+    ];
+    // console.log('onChangeRGB(): state before new RGBs', this.state);
+    this.setState({ r: newR, g: newG, b: newB });
+    // console.log('onChangeRGB(): state after new RGBs', this.state);
     this.setButtonBackgroundColor();
     this.setButtonTextColor();
   }
@@ -50,19 +55,25 @@ class App extends React.Component {
   // set the button's text color to white or black,
   // depending on the button color's brightness.
   setButtonTextColor = () => {
-    var brightness = (parseInt(this.state.r) + 
-    parseInt(this.state.g) + parseInt(this.state.b)) / 3;
-      document.getElementById(
-        "colorButton").style.color = 
-        (brightness > 128) ? "black" : "white";
-      console.log('setButtonTextColor(), brightness:', brightness);
-}
+    const rgb = this.state;
+    var brightness = Math.floor((parseInt(rgb.r) + 
+    parseInt(rgb.g) + parseInt(rgb.b)) / 3);
+    document.getElementById(
+      "colorButton").style.color = 
+      (brightness >= 110) ? "black" : "white";
+  }
+
+  // Apparently just running this function provides the necessary
+  // delay for the new state r, g, b values to take effect!
+  delayThenChangeRGB = () => {
+    setTimeout(this.onChangeRGB, 0);
+  }
 
   render() {
     return (
       <div className="App">
         <button className='colorButton' id='colorButton'
-          onClick= {this.onChangeRGB}>
+          onClick= {this.delayThenChangeRGB}>
           <div>My current RGB color is &nbsp;
             {this.getButtonRGBString()}.</div>
           <div>Click me to change it.</div>

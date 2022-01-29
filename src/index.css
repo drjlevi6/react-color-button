@@ -15,3 +15,7 @@ code {
 .App {
   text-align: center;
 }
+
+#colorButton{
+  font-size: large;
+}
