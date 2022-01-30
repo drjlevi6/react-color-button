@@ -89,9 +89,11 @@ class App extends React.Component {
         </Alert.Heading>
         <p></p>
         <Row className='contents-row'>
-          My current RGB color is &nbsp;
+          My current color’s RGB-values are
+        </Row>
+        <Row className='contents-row-2'>
           {this.getButtonRGBString()}.
-        Click my Change Color button to change it.
+        Click the Change Color button to get a new, randomly computed color. 
         </Row>
         <Row className='filler'>&nbsp;</Row>
         <Row id='buttonRow' xs={6}>
