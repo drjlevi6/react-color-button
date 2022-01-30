@@ -6,8 +6,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import Container from 'react-bootstrap/container';
-//import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import './index.css';
 
 class App extends React.Component {
@@ -27,15 +30,15 @@ class App extends React.Component {
   setButtonBackgroundColor() {
     const rgb = this.state;
     document.getElementById(
-      "colorButton").style.backgroundColor = 
+      "colorAlert").style.backgroundColor = 
       'rgb(' + rgb.r + ',' +  rgb.g + ',' + rgb.b + ')';
   }
 
   // Initialize the button's background color
   componentDidMount() {
+    const colorAlert = document.getElementById("colorAlert");
+    colorAlert.style.disply = 'block';
     this.setButtonBackgroundColor();
-    //this.setButtonTextColor();
-    //this.onChangeRGB();
  }
 
   // Change the button's background RGB color.
@@ -45,9 +48,9 @@ class App extends React.Component {
       this.getRandomRGBComponent(),
       this.getRandomRGBComponent()
     ];
-    // console.log('onChangeRGB(): state before new RGBs', this.state);
+    //console.log('onChangeRGB(): state before new RGBs', this.state);
     this.setState({ r: newR, g: newG, b: newB });
-    // console.log('onChangeRGB(): state after new RGBs', this.state);
+    //console.log('onChangeRGB(): state after new RGBs', this.state);
     this.setButtonBackgroundColor();
     this.setButtonTextColor();
   }
@@ -59,7 +62,7 @@ class App extends React.Component {
     var brightness = Math.floor((parseInt(rgb.r) + 
     parseInt(rgb.g) + parseInt(rgb.b)) / 3);
     document.getElementById(
-      "colorButton").style.color = 
+      "colorAlert").style.color = 
       (brightness >= 110) ? "black" : "white";
   }
 
@@ -69,20 +72,41 @@ class App extends React.Component {
     setTimeout(this.onChangeRGB, 0);
   }
 
-  render() {
-    return (
-      <div className="App">
-        <button className='colorButton' id='colorButton'
-          onClick= {this.delayThenChangeRGB}>
-          <div>My current RGB color is &nbsp;
-            {this.getButtonRGBString()}.</div>
-          <div>Click me to change it.</div>
-        </button>
-      </div>
-    )
+  hideAlert() {
+      //alert('hideAlert');
+      document.getElementById("colorAlert").style.display = 'none';
   }
-}
+
+  render() {
+     return (
+    <Container className="App">
+      <Col className='main-col' xs={4}>
+       <div className='goodbye' id='goodbyeDiv'
+        fontSize='large'>Goodbye!</div>  
+      <Alert className='goodbye overlay' id='colorAlert'>
+        <Alert.Heading className='welcome-row'>
+          Welcome to the Color-Displayer!
+        </Alert.Heading>
+        <hr />
+          My current RGB color is &nbsp;
+          {this.getButtonRGBString()}.
+        Click the Change Color button to change it.
+        <Row className='filler'>&nbsp;</Row>
+        <Row id='buttonRow' xs={6}>
+        <Button onClick={this.delayThenChangeRGB}>
+          Change Color
+        </Button>
+        &nbsp;
+        <Button onClick={this.hideAlert}>
+          Close
+        </Button>
+        </Row>
+
+      </Alert>
+      </Col>
+      </Container>
+   )
+  }                                 // render
+}                                   // class App
 
 ReactDOM.render(<App />, document.getElementById('root'))
-
-

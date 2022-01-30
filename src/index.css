@@ -14,8 +14,36 @@ code {
 
 .App {
   text-align: center;
+  align-items: center;
 }
 
-#colorButton{
+.main-col {
+  margin: auto;
+}
+
+.welcome-row {
+  text-align: center;
+  font-weight: 700;
+}
+
+.goodbye {
+  top: 10%;
+  left: 20%;
+  margin: auto;
+  position: absolute;
+  font-size: xx-large;
+  font-weight: 700;
+}
+
+#colorAlert{
+  width: 350px;
+  height: auto;
+  text-align: left;
   font-size: large;
+  font-weight: 400;
+  padding: 6px;
+}
+
+#buttonRow {
+  text-align: right;
 }
