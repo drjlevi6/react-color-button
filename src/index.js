@@ -84,13 +84,15 @@ class App extends React.Component {
        <div className='goodbye' id='goodbyeDiv'
         fontSize='large'>Goodbye!</div>  
       <Alert className='goodbye overlay' id='colorAlert'>
-        <Alert.Heading className='welcome-row'>
+        <Alert.Heading className='welcome-header'>
           Welcome to the Color-Displayer!
         </Alert.Heading>
-        <hr />
+        <p></p>
+        <Row className='contents-row'>
           My current RGB color is &nbsp;
           {this.getButtonRGBString()}.
-        Click the Change Color button to change it.
+        Click my Change Color button to change it.
+        </Row>
         <Row className='filler'>&nbsp;</Row>
         <Row id='buttonRow' xs={6}>
         <Button onClick={this.delayThenChangeRGB}>

@@ -21,9 +21,11 @@ code {
   margin: auto;
 }
 
-.welcome-row {
+.welcome-header {
   text-align: center;
   font-weight: 700;
+  background-color: black;
+  color: white;
 }
 
 .goodbye {
@@ -41,9 +43,14 @@ code {
   text-align: left;
   font-size: large;
   font-weight: 400;
-  padding: 6px;
+  padding: 0px 0px 6px 0px;
+}
+
+.contents-row {
+  padding-left: 6px;;
 }
 
 #buttonRow {
   text-align: right;
+  padding-right: 6px;
 }
